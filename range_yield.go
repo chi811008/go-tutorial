@@ -33,6 +33,15 @@ func main() {
 		fmt.Println(e)
 	}
 
+	fmt.Println("Seq is an iterator over sequences of individual values")
+	fmt.Println("yield AllSeq")
+	for e := range All1(ls1) {
+		fmt.Println(e)
+	}
+	for e := range All1(ls2) {
+		fmt.Println(e)
+	}
+
 }
 
 
@@ -73,6 +82,28 @@ func allLs[E Element](ele []E) func(yield func(E) bool) {
 	return func(yield func(E) bool) {
 		for _, e := range ele {
 			if !yield(e) {
+				break
+			}
+		}
+	}
+}
+
+func allLsV[V any](vs []V) func(yield func(V) bool) {
+	return func(yield func(V) bool) {
+		for _, v := range vs {
+			if !yield(v) {
+				break
+			}
+		}
+	}
+}
+
+type Seq[V any] func(yield func(V) bool)
+
+func All1[V any](s []V) Seq[V] {
+	return func(yield func(V) bool) {
+		for _, v := range s {
+			if !yield(v) {
 				break
 			}
 		}

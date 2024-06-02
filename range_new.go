@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 // go version 1.23+
-func rangeNew() {
+func main() {
 	// int
 	fmt.Println("int i := 0; i < 10; i ++")
 	for i := 0; i < 10; i++ {
