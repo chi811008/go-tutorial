@@ -20,8 +20,27 @@ func rangeNew() {
 	for v := range seq1 {
 		fmt.Println("in loop, v:", v)
 	}
+	for v := range seq2 {
+		fmt.Println("in loop, v:", v)
+	}
+
+	for v := range seqBreak {
+		fmt.Println("in loop, v:", v)
+	}
+
 }
 
-func seq1(yield func(int) bool) {
+func seq1(yield func(int) bool){
 	fmt.Println("in seq1")
+}
+func seq2(yield func(int) bool) {
+	fmt.Println("in seq2")
+	yield(100)
+	yield(200)
+}
+func seqBreak(yield func(int) bool) {
+	fmt.Println("in seqBreak")
+	yield(100)
+	// break
+	yield(200)
 }

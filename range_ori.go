@@ -5,6 +5,19 @@ import (
 )
 
 func rangeOri() {
+	/*
+	Range expression                                   1st value          2nd value
+
+	array or slice      a  [n]E, *[n]E, or []E         index    i  int    a[i]       E
+	string              s  string type                 index    i  int    see below  rune
+	map                 m  map[K]V                     key      k  K      m[k]       V
+	channel             c  chan E, <-chan E            element  e  E
+
+	integer             n  integer type                index    i int
+	function, 0 values  f  func(func()bool) bool
+	function, 1 value   f  func(func(V)bool) bool      value    v  V
+	function, 2 values  f  func(func(K, V)bool) bool   key      k  K      v          V
+	*/
 	// slice
 	fmt.Println("slice")
 	numbers := []int{1, 2, 3, 4, 5}
