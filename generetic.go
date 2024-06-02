@@ -1,8 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func SumIntsOrFloats[K comparable, V int64 | float64](m map[K]V) V {
+func SumIntsOrFloats[K comparable, V int64 | float64 | string](m map[K]V) V {
     var s V
     for _, v := range m {
         s += v
@@ -11,7 +13,7 @@ func SumIntsOrFloats[K comparable, V int64 | float64](m map[K]V) V {
 }
 
 type Number interface {
-    int64 | float64
+    int64 | float64 | string
 }
 
 // SumNumbers sums the values of map m. It supports both integers
@@ -37,7 +39,7 @@ type Unsigned interface {
     ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr
 }
 
-func example () {
+func main() {
     // Initialize a map for the integer values
 	ints := map[string]int64{
 		"first":  34,
@@ -49,12 +51,20 @@ func example () {
 		"first":  35.98,
 		"second": 26.99,
 	}
-	
-	fmt.Printf("Generic Sums: %v and %v\n",
-    	SumIntsOrFloats[string, int64](ints),
-    	SumIntsOrFloats[string, float64](floats))
 
-	fmt.Printf("Interface Sums: %v and %v\n",
+	strings	:= map[string]string{
+		"first": "Hello",
+		"second": ", ",
+		"third": "World",
+	}
+	
+	fmt.Printf("Generic Sums: %v, %v, %v\n",
+    	SumIntsOrFloats[string, int64](ints),
+    	SumIntsOrFloats[string, float64](floats),
+    	SumIntsOrFloats[string, string](strings))
+
+	fmt.Printf("Interface Sums: %v, %v, %v\n",
 		SumNumbers[string, int64](ints),
-		SumNumbers[string, float64](floats))
+		SumNumbers[string, float64](floats),
+		SumNumbers[string, string](strings))
 }
